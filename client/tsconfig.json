@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/transfer.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/transfer.js", "pages/api/mint.js"],
   "exclude": ["node_modules"]
 }

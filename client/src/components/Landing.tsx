@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Head from 'next/head';
 import {
   Box,
@@ -9,9 +10,15 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  Input,
 } from '@chakra-ui/react';
 
 export default function CallToActionWithAnnotation() {
+  const [address, setAddress] = useState('')
+  const handleAddressChange = (e:any) => {
+    const val = e.target.value;
+    setAddress(val)
+  }
   const handleTransfer = () => {
     fetch(`/api/transfer`, {
       method: 'POST',
@@ -19,6 +26,15 @@ export default function CallToActionWithAnnotation() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify("0x50B80aa3877fC852f3194a0331177FDDcF0891bf"),
+    });
+  }
+  const handleMint = () => {
+    fetch(`/api/mint`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(address),
     });
   }
   return (
@@ -66,6 +82,22 @@ export default function CallToActionWithAnnotation() {
                 bg: 'green.500',
               }}>
               Transfer
+            </Button>
+            <Input
+              placeholder="Wallet Address"
+              onChange={(e) => {handleAddressChange(e)}}
+            >
+            </Input>
+            <Button
+              colorScheme={'green'}
+              bg={'green.400'}
+              rounded={'full'}
+              px={6}
+              onClick={handleMint}
+              _hover={{
+                bg: 'green.500',
+              }}>
+              Mint
             </Button>
             <Button variant={'link'} colorScheme={'blue'} size={'sm'}>
               Learn more
